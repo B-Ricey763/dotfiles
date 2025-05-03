@@ -38,6 +38,7 @@ return {
 				"tinymist",
 				"typescript-language-server",
 				"yamlfmt",
+				"markdownlint",
 			},
 		},
 	},
