@@ -3,16 +3,6 @@
 sudo yabai --load-sa
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 
-# Label spaces
-yabai -m space 8 --label web
-yabai -m space 9 --label gtd
-yabai -m space 10 --label notes
-
-# Except for reminders, obsidian, and arc; I like those windows to just stay there
-yabai -m config --space web layout float
-yabai -m config --space gtd layout float
-yabai -m config --space notes layout float
-
 # Exclude problematic apps from being managed:
 yabai -m rule --add app="^(LuLu|Calculator|Software Update|Dictionary|VLC|System Preferences|System Settings|zoom.us|Photo Booth|Archive Utility|Python|LibreOffice|App Store|Steam|Activity Monitor)$" manage=off
 yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
@@ -28,14 +18,6 @@ yabai -m rule --add app="^Messages$" scratchpad=messages grid=11:6:2:2:2:8
 yabai -m rule --add app="^Microsoft Teams$" scratchpad=teams grid=11:11:1:1:9:9
 yabai -m rule --add app="^Slack$" scratchpad=slack grid=11:11:1:1:9:9
 
-# Send stuff to spaces
-yabai -m rule --add app="^Obsidian$" space=^notes
-yabai -m rule --add app="^Arc$" space=^web
-
-# Create left/right with mail reminders
-yabai -m rule --add app="^Reminders$" space=^gtd grid=1:2:0:1:1:1
-yabai -m rule --add app="^Mail$" space=^gtd grid=1:2:1:1:1:1
-
 # When an application is closed, just focus the next app that is under the cursor
 yabai -m signal --add event=window_destroyed action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
 yabai -m signal --add event=application_terminated action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
@@ -47,8 +29,8 @@ yabai -m signal --add app='^Ghostty$' event=window_created action='yabai -m spac
 yabai -m signal --add app='^Ghostty$' event=window_destroyed action='yabai -m space --layout $(yabai -m query --spaces --space | jq -r .type)'
 
 yabai -m config \
-                mouse_follows_focus on \
-                focus_follows_mouse autoraise \
+                mouse_follows_focus off \
+                focus_follows_mouse off \
                 window_placement second_child \
                 split_ratio 0.50 \
                 split_type auto \
@@ -65,16 +47,16 @@ yabai -m config \
                 mouse_drop_action swap
 
 # Visual stuff
-yabai -m config \
-                window_topmost off \
-                window_shadow off \
-                insert_feedback_color 0xaad75f5f \
-                active_window_border_color 0xBF775759 \
-                normal_window_border_color 0x7f353535 \
-                window_border_width 4 \
-                window_border_radius 12 \
-                window_border_blur on \
-                window_border_hidpi on \
-                window_border on
+# yabai -m config \
+#                 window_topmost off \
+#                 window_shadow off \
+#                 insert_feedback_color 0xaad75f5f \
+#                 active_window_border_color 0xBF775759 \
+#                 normal_window_border_color 0x7f353535 \
+#                 window_border_width 4 \
+#                 window_border_radius 12 \
+#                 window_border_blur on \
+#                 window_border_hidpi on \
+#                 window_border on
 
 echo "yabai configuration loaded.."

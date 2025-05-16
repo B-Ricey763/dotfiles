@@ -1,15 +1,12 @@
 return {
+	{ "mason-org/mason.nvim", opts = {} },
+	{ "mason-org/mason-lspconfig.nvim", opts = {} },
 	"neovim/nvim-lspconfig",
+	dependencies = {
+		"mason-org/mason.nvim",
+		"mason-org/mason-lspconfig.nvim",
+	},
 	config = function()
-		vim.lsp.enable({
-			"lua_ls",
-			"bashls",
-			"basedpyright",
-			"biome",
-			"ruff",
-			"ts_ls",
-			"tinymist",
-		})
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("lsp_attach_disable_ruff_hover", { clear = true }),
 			callback = function(args)

@@ -22,7 +22,7 @@ if status is-interactive
     starship init fish | source
 
     # Fuzzies
-    fzf --fish | source
+    # fzf --fish | source
 
     # So that it navigates to symlinks 
     set -gx _ZO_RESOLVE_SYMLINKS 1

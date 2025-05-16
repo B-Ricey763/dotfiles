@@ -3,7 +3,7 @@ return {
 	opts = {
 		format_on_save = {
 			timeout_ms = 500,
-			lsp_fallback = false,
+			lsp_fallback = true,
 		},
 		formatters_by_ft = {
 			lua = { "stylua" },
@@ -14,7 +14,7 @@ return {
 			json = { "biome" },
 			sh = { "shfmt" },
 			c = { "clang-format" },
-			python = { "ruff" },
+			python = { "black" },
 			markdown = { "markdownlint" },
 		},
 	},
