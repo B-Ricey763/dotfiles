@@ -7,6 +7,7 @@ Configurations for a bunch of unix/macos apps that I use.
 - [Neovim](https://neovim.io/): text editor
 - [Ghostty](https://ghostty.org/): (might have some macos specific settings)
   terminal emulator
+    - Note, you have to set `ghostty_cmd` in `~/.config/chezmoi/chezmoi.toml` as described [here](https://www.chezmoi.io/user-guide/manage-machine-to-machine-differences/#use-templates) in order for the shell to be picked up
 - [fish](https://fishshell.com/): shell (I've tried [nushell](https://www.nushell.sh/) in the past, but it's not there yet)
 - [starship.rs](https://starship.rs/): cross-platform prompt
 - [sioyek](https://sioyek.info/#): pdf viewer (don't ask why I don't just use preview)

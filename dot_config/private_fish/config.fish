@@ -65,7 +65,7 @@ function conda --wraps 'conda'
     # We erase ourselves because conda defines a function of the same name.
     # This allows checking that that happened and can prevent infinite loops
     functions --erase conda
-    /Users/bricey/miniconda3/bin/conda "shell.fish" "hook" | source
+    /home/bhanna30/miniforge3/condabin/conda "shell.fish" "hook" | source
 
     if not functions -q conda
         # If the function wasn't defined, we should not do the call below.
