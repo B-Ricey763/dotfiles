@@ -24,6 +24,10 @@ function keymap.setup()
   vim.keymap.set('n', '<leader>ca', function()
     vim.lsp.buf.code_action()
   end, { desc = '[C]ode [A]ction' })
+
+  vim.keymap.set('n', '<leader>cr', function()
+    vim.lsp.buf.rename()
+  end, { desc = '[R]ename' })
 end
 
 -- setup via autcmd

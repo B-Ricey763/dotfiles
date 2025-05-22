@@ -2,6 +2,8 @@ if status is-interactive
     # binds, remember mode for VI stuff
     bind ctrl-y --mode insert accept-autosuggestion
 
+    # Make sure to run `fish_default_keybindings` to generate all the defaults
+
     # Configuring shortcuts. [co]nfig [fi]sh for example
     abbr --add cofi chezmoi edit --apply ~/.config/fish/
     abbr --add cogh chezmoi edit --apply ~/.config/ghostty/config
