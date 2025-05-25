@@ -3,6 +3,11 @@
 sudo yabai --load-sa
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 
+yabai -m rule --add app="^Spotify$" scratchpad=spotify grid=11:11:1:1:9:9 manage=off
+yabai -m rule --add app="^Messages$" scratchpad=messages grid=11:6:2:2:2:8 manage=off
+yabai -m rule --add app="^Microsoft Teams$" scratchpad=teams grid=11:11:1:1:9:9 manage=off
+yabai -m rule --add app="^Slack$" scratchpad=slack grid=11:11:1:1:9:9 manage=off
+
 # Exclude problematic apps from being managed:
 yabai -m rule --add app="^(LuLu|Calculator|Software Update|Dictionary|VLC|System Preferences|System Settings|zoom.us|Photo Booth|Archive Utility|Python|LibreOffice|App Store|Steam|Activity Monitor)$" manage=off
 yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
@@ -13,14 +18,9 @@ yabai -m rule --add label="Select file to save to" app="^Inkscape$" title="Selec
 yabai -m rule --add app="^Raycast$" manage=off
 yabai -m rule --add app=‎WhatsApp manage=off
 # Scratchpads
-yabai -m rule --add app="^Spotify$" scratchpad=spotify grid=11:11:1:1:9:9
-yabai -m rule --add app="^Messages$" scratchpad=messages grid=11:6:2:2:2:8
-yabai -m rule --add app="^Microsoft Teams$" scratchpad=teams grid=11:11:1:1:9:9
-yabai -m rule --add app="^Slack$" scratchpad=slack grid=11:11:1:1:9:9
-
 # When an application is closed, just focus the next app that is under the cursor
-yabai -m signal --add event=window_destroyed action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
-yabai -m signal --add event=application_terminated action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
+# yabai -m signal --add event=window_destroyed action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
+# yabai -m signal --add event=application_terminated action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
 
 # Fix ghostty
 # HACK: very interesting issue here. Before, we were just setting layout to BSP unconditionally after ghostty tweaks. Now, we reset the space to whatever
@@ -31,32 +31,35 @@ yabai -m signal --add app='^Ghostty$' event=window_destroyed action='yabai -m sp
 yabai -m config \
                 mouse_follows_focus off \
                 focus_follows_mouse off \
+                display_arrangement_order default \
+                window_origin_display default \
                 window_placement second_child \
+                window_insertion_point focused \
+                window_zoom_persist on \
+                window_shadow on \
+                window_animation_duration 0.0 \
+                window_animation_easing ease_out_circ \
+                window_opacity_duration 0.0 \
+                active_window_opacity 1.0 \
+                normal_window_opacity 0.90 \
+                window_opacity off \
+                insert_feedback_color 0xffd75f5f \
                 split_ratio 0.50 \
                 split_type auto \
                 auto_balance off \
-                top_padding 10 \
-                left_padding 10 \
-                right_padding 10 \
-                bottom_padding 10 \
-                window_gap 10 \
+                top_padding 12 \
+                bottom_padding 12 \
+                left_padding 12 \
+                right_padding 12 \
+                window_gap 12 \
                 layout bsp \
                 mouse_modifier fn \
                 mouse_action1 move \
                 mouse_action2 resize \
                 mouse_drop_action swap
 
-# Visual stuff
-# yabai -m config \
-#                 window_topmost off \
-#                 window_shadow off \
-#                 insert_feedback_color 0xaad75f5f \
-#                 active_window_border_color 0xBF775759 \
-#                 normal_window_border_color 0x7f353535 \
-#                 window_border_width 4 \
-#                 window_border_radius 12 \
-#                 window_border_blur on \
-#                 window_border_hidpi on \
-#                 window_border on
-
 echo "yabai configuration loaded.."
+
+# Make purple borders on active, nonthing on inactive
+borders active_color=0xFFDC56FE inactive_color=0x0 width=7.0 &
+echo "Borders activated..."

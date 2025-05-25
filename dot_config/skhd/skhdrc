@@ -1,4 +1,3 @@
-# NOTE: this assumes you are using fish shell, not bash, as certain subsitutions don't work 
 
 
 ## Navigation (lalt - ...)
@@ -23,9 +22,11 @@ lalt - l : yabai -m window --focus east  || yabai -m display --focus east
 lalt - b : yabai -m window --focus first
 lalt - e : yabai -m window --focus  last
 
-# Float / Unfloat window: lalt - b
 alt - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
 #
+# Toggle split orientation of the selected windows node: shift + lalt - s
+shift + lalt - s : yabai -m window --toggle split
+
 # make floating window fill screen
 shift + alt - up     : yabai -m window --grid 1:1:0:0:1:1
 
@@ -37,9 +38,6 @@ shift + alt - right  : yabai -m window --grid 1:2:1:0:1:1
 
 # Make window zoom to fullscreen: shift + lalt - f
 shift + lalt - f : yabai -m window --toggle zoom-fullscreen
-
-# Make window zoom to parent node: lalt - f 
-# lalt - f : yabai -m window --toggle zoom-parent
 
 ## Window Movement (shift + lalt - ...)
 # Moving windows in spaces: shift + lalt - {j, k, l, h}
@@ -53,8 +51,6 @@ shift + lalt - k : yabai -m window --warp north
 shift + lalt - l : yabai -m window --warp east 
 #|| $(yabai -m window --display east && yabai -m display --focus east && yabai -m window --warp first) || yabai -m window --move rel:10:0
 
-# Toggle split orientation of the selected windows node: shift + lalt - s
-shift + lalt - s : yabai -m window --toggle split
 
 # Move window to space and focus
 shift + lalt - 1 : yabai -m window --space 1 --focus
