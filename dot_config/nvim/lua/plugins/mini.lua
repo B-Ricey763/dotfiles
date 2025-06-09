@@ -8,7 +8,6 @@ return { -- Collection of various small independent plugins/modules
 	event = "VeryLazy",
 	config = function()
 		-- No configured modules
-		require("mini.pairs").setup()
 		require("mini.icons").setup()
 		require("mini.comment").setup()
 		require("mini.files").setup()
@@ -25,6 +24,7 @@ return { -- Collection of various small independent plugins/modules
 				}),
 				-- these are defined in nvim treesitter file 'textobjects.scm'
 				-- also see https://github.com/mawkler/jsx-element.nvim/tree/main
+				-- these lowkey don't work
 				t = ai.gen_spec.treesitter({
 					a = "@jsx_element.outer",
 					i = "@jsx_element.inner",
