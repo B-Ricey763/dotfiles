@@ -43,6 +43,22 @@ if status is-interactive
 
     # HACK: set pnpm home
     set -gx PNPM_HOME "$HOME/.pnpm"
+
+    # >>> mamba initialize >>>
+    # !! Contents within this block are managed by 'mamba shell init' !!
+    set -gx MAMBA_EXE "/home/bhanna30/miniforge3/bin/mamba"
+    set -gx MAMBA_ROOT_PREFIX "/home/bhanna30/miniforge3"
+    $MAMBA_EXE shell hook --shell fish --root-prefix $MAMBA_ROOT_PREFIX | source
+    # <<< mamba initialize <<<
+
+    # Workaround, see https://github.com/mamba-org/mamba/issues/3847
+    alias mamba micromamba
+    mamba activate base
+
+    # The next line updates PATH for the Google Cloud SDK.
+    if [ -f '/Users/bricey/Downloads/google-cloud-sdk/path.fish.inc' ]; source '/Users/bricey/Downloads/google-cloud-sdk/path.fish.inc'; end
+
+    thefuck --alias | source
 end
 
 
@@ -62,24 +78,20 @@ end
 # # <<< conda initialize <<<
 
 # Lazy load conda from this thread: https://stackoverflow.com/questions/74661211/how-to-wrap-the-conda-command-in-a-fish-function-to-initialize-conda-only-on-dem
-function conda --wraps 'conda'
-    echo 'Initializing conda...'
-    # We erase ourselves because conda defines a function of the same name.
-    # This allows checking that that happened and can prevent infinite loops
-    functions --erase conda
-    /home/bhanna30/miniforge3/condabin/conda "shell.fish" "hook" | source
+# function conda --wraps 'conda'
+#     echo 'Initializing conda...'
+#     # We erase ourselves because conda defines a function of the same name.
+#     # This allows checking that that happened and can prevent infinite loops
+#     functions --erase conda
+#     /home/bhanna30/miniforge3/condabin/conda "shell.fish" "hook" | source
+#
+#     if not functions -q conda
+#         # If the function wasn't defined, we should not do the call below.
+#         echo 'Something went wrong initializing conda!' >&2
+#         return 1
+#     end
+#     # Now we can call `conda`, which is a function, but not this one (because we erased it),
+#     # so this is not an infinite loop.
+#     conda $argv
+# end
 
-    if not functions -q conda
-        # If the function wasn't defined, we should not do the call below.
-        echo 'Something went wrong initializing conda!' >&2
-        return 1
-    end
-    # Now we can call `conda`, which is a function, but not this one (because we erased it),
-    # so this is not an infinite loop.
-    conda $argv
-end
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/bricey/Downloads/google-cloud-sdk/path.fish.inc' ]; source '/Users/bricey/Downloads/google-cloud-sdk/path.fish.inc'; end
-
-thefuck --alias | source
