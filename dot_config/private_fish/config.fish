@@ -59,6 +59,8 @@ if status is-interactive
     if [ -f '/Users/bricey/Downloads/google-cloud-sdk/path.fish.inc' ]; source '/Users/bricey/Downloads/google-cloud-sdk/path.fish.inc'; end
 
     thefuck --alias | source
+
+    pixi completion --shell fish | source
 end
 
 
