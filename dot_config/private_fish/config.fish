@@ -18,11 +18,11 @@ if status is-interactive
     # Make sure nvim is default editor
     set -gx EDITOR nvim
 
-    # Prompt
+    # Setup tools
     starship init fish | source
-
-    # Fuzzies
-    # fzf --fish | source
+    thefuck --alias | source
+    pixi completion --shell fish | source
+    atuin init fish | source
 
     # So that it navigates to symlinks 
     set -gx _ZO_RESOLVE_SYMLINKS 1
@@ -56,10 +56,6 @@ if status is-interactive
     # The next line updates PATH for the Google Cloud SDK.
     if [ -f '/Users/bricey/Downloads/google-cloud-sdk/path.fish.inc' ]; source '/Users/bricey/Downloads/google-cloud-sdk/path.fish.inc'; end
 
-    thefuck --alias | source
-
-    pixi completion --shell fish | source
-    atuin init fish | source
 end
 
 
