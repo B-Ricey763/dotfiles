@@ -11,6 +11,9 @@ if status is-interactive
     abbr --add cosi chezmoi edit --apply /Users/bricey/Library/Application\ Support/sioyek/
     abbr --add covi chezmoi edit --apply ~/.config/nvim/
 
+    abbr --add md mamba deactivate 
+    abbr --add ma mamba activate
+
     # Abbr
     abbr --add v nvim
     abbr --add lg lazygit
@@ -44,14 +47,14 @@ if status is-interactive
 
     # >>> mamba initialize >>>
     # !! Contents within this block are managed by 'mamba shell init' !!
-    set -gx MAMBA_EXE "/home/bhanna30/miniforge3/bin/mamba"
-    set -gx MAMBA_ROOT_PREFIX "/home/bhanna30/miniforge3"
+    set -gx MAMBA_EXE "$HOME/miniforge3/bin/mamba"
+    set -gx MAMBA_ROOT_PREFIX "$HOME/miniforge3"
     $MAMBA_EXE shell hook --shell fish --root-prefix $MAMBA_ROOT_PREFIX | source
     # <<< mamba initialize <<<
 
     # Workaround, see https://github.com/mamba-org/mamba/issues/3847
     alias mamba micromamba
-    mamba activate base
+    # mamba activate base
 
     # The next line updates PATH for the Google Cloud SDK.
     if [ -f '/Users/bricey/Downloads/google-cloud-sdk/path.fish.inc' ]; source '/Users/bricey/Downloads/google-cloud-sdk/path.fish.inc'; end
@@ -60,19 +63,6 @@ end
 
 
 
-
-# # >>> conda initialize >>>
-# # !! Contents within this block are managed by 'conda init' !!
-# if test -f /Users/bricey/miniconda3/bin/conda
-#     eval /Users/bricey/miniconda3/bin/conda "shell.fish" "hook" $argv | source
-# else
-#     if test -f "/Users/bricey/miniconda3/etc/fish/conf.d/conda.fish"
-#         . "/Users/bricey/miniconda3/etc/fish/conf.d/conda.fish"
-#     else
-#         set -x PATH "/Users/bricey/miniconda3/bin" $PATH
-#     end
-# end
-# # <<< conda initialize <<<
 
 # Lazy load conda from this thread: https://stackoverflow.com/questions/74661211/how-to-wrap-the-conda-command-in-a-fish-function-to-initialize-conda-only-on-dem
 # function conda --wraps 'conda'
