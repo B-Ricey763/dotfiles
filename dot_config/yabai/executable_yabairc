@@ -3,6 +3,8 @@
 sudo yabai --load-sa
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 
+yabai -m space 9 --label web
+
 yabai -m rule --add app="^Spotify$" scratchpad=spotify grid=11:11:1:1:9:9 manage=off
 yabai -m rule --add app="^Messages$" scratchpad=messages grid=11:6:2:2:2:8 manage=off
 yabai -m rule --add app="^Microsoft Teams$" scratchpad=teams grid=11:11:1:1:9:9 manage=off
@@ -10,7 +12,7 @@ yabai -m rule --add app="^Slack$" scratchpad=slack grid=11:11:1:1:9:9 manage=off
 
 # Exclude problematic apps from being managed:
 yabai -m rule --add app="^(LuLu|Calculator|Software Update|Dictionary|VLC|System Preferences|System Settings|zoom.us|Photo Booth|Archive Utility|Python|LibreOffice|App Store|Steam|Activity Monitor)$" manage=off
-yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
+yabai -m rule --add label="Finder" app="^Finder$" manage=off
 yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
 yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
 yabai -m rule --add app="^FaceTime$" manage=off
@@ -18,19 +20,23 @@ yabai -m rule --add label="Select file to save to" app="^Inkscape$" title="Selec
 yabai -m rule --add app="^Raycast$" manage=off
 yabai -m rule --add app=‎WhatsApp manage=off
 # Scratchpads
-# When an application is closed, just focus the next app that is under the cursor
-# yabai -m signal --add event=window_destroyed action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
-# yabai -m signal --add event=application_terminated action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
 
+yabai -m signal --add event=window_destroyed active=yes action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse &> /dev/null || yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id) &> /dev/null"
+yabai -m signal --add event=window_minimized active=yes action="if \$(yabai -m query --windows --window \$YABAI_WINDOW_ID | jq -r '.\"is-floating\"'); then yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse &> /dev/null || yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id) &> /dev/null; fi"
 # Fix ghostty
 # HACK: very interesting issue here. Before, we were just setting layout to BSP unconditionally after ghostty tweaks. Now, we reset the space to whatever
 # it was before, whether stack, bsp, or float
-yabai -m signal --add app='^Ghostty$' event=window_created action='yabai -m space --layout $(yabai -m query --spaces --space | jq -r .type)'
-yabai -m signal --add app='^Ghostty$' event=window_destroyed action='yabai -m space --layout $(yabai -m query --spaces --space | jq -r .type)'
+# yabai -m signal --add app='^Ghostty$' event=window_created action='yabai -m space --layout $(yabai -m query --spaces --space | jq -r .type)'
+# yabai -m signal --add app='^Ghostty$' event=window_destroyed action='yabai -m space --layout $(yabai -m query --spaces --space | jq -r .type)'
+
+yabai -m rule --add app='^Ghostty$' manage=off grid=1:1:0:0:1:1
+yabai -m rule --add app='^Zen$' space=web sub-layer=below
+
+yabai -m config --space web layout float
 
 yabai -m config \
-                mouse_follows_focus off \
-                focus_follows_mouse off \
+                mouse_follows_focus on \
+                focus_follows_mouse autoraise \
                 display_arrangement_order default \
                 window_origin_display default \
                 window_placement second_child \

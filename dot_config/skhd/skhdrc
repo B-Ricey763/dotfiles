@@ -30,6 +30,9 @@ shift + lalt - s : yabai -m window --toggle split
 # make floating window fill screen
 shift + alt - up     : yabai -m window --grid 1:1:0:0:1:1
 
+# Resize to sensize size
+shift + alt - w     : yabai -m window --grid 4:4:1:1:2:2
+
 # make floating window fill left-half of screen
 shift + alt - left   : yabai -m window --grid 1:2:0:0:1:1
 
