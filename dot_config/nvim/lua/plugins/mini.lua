@@ -10,7 +10,9 @@ return { -- Collection of various small independent plugins/modules
 		-- No configured modules
 		require("mini.icons").setup()
 		require("mini.comment").setup()
-		require("mini.files").setup()
+		require("mini.files").setup({
+			options = { use_as_default_explorer = false },
+		})
 		-- Mini trailspace could be enabled, but that screws up the dashboard in mini.snack
 
 		local ai = require("mini.ai")
