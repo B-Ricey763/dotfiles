@@ -19,7 +19,7 @@ return {
 			json = { "biome" },
 			sh = { "shfmt" },
 			c = { "clang-format" },
-			python = { "ruff" },
+			python = { "ruff_format", "ruff_organize_imports", "ruff_fix" },
 			markdown = { "markdownlint" },
 		},
 	},
@@ -43,4 +43,15 @@ return {
 			desc = "Re-enable autoformat-on-save",
 		})
 	end,
+	-- keys = {
+	-- 	{
+	-- 		-- Customize or remove this keymap to your liking
+	-- 		"<leader>C",
+	-- 		function()
+	-- 			require("conform").format({ async = true })
+	-- 		end,
+	-- 		mode = "",
+	-- 		desc = "Format buffer",
+	-- 	},
+	-- },
 }
