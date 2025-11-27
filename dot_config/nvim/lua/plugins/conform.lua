@@ -13,7 +13,7 @@ return {
 			javascriptreact = { "biome" },
 			json = { "biome" },
 			sh = { "shfmt" },
-			c = { "clang-format" },
+			-- c = { "clang-format" },
 			python = { "black" },
 			markdown = { "markdownlint" },
 		},

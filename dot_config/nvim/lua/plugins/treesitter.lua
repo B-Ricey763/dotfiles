@@ -27,15 +27,4 @@ return {
 			})
 		end,
 	},
-	-- {
-	--   'nvim-treesitter/nvim-treesitter-context',
-	--   dependencies = 'nvim-treesitter/nvim-treesitter',
-	--   event = 'VeryLazy',
-	--   opts = {},
-	-- },
-	{
-		"windwp/nvim-ts-autotag",
-		opts = {},
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-	},
 }
