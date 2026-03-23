@@ -1,0 +1,11 @@
+quick-terminal-position=center
+theme = Catppuccin Mocha
+macos-titlebar-style = tabs
+font-size = 18
+font-thicken = true
+background-opacity=0.9
+background-blur-radius=20
+cursor-invert-fg-bg=true
+keybind = global:cmd+shift+'=toggle_quick_terminal
+keybind = global:cmd+shift+enter=new_window
+shell-integration = zsh

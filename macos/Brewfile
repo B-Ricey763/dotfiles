@@ -1,0 +1,25 @@
+# Productivity Essentials
+brew "fzf"
+brew "fd"
+brew "ripgrep"
+brew "jq"
+brew "gh"
+brew "starship"
+brew "zoxide"
+brew "eza"
+brew "bat"
+brew "git-delta"
+
+# Terminal Workflow
+brew "neovim"
+brew "tmux"
+brew "lazygit"
+brew "yazi"
+
+# System / Window Management
+brew "asmvik/formulae/yabai"
+brew "asmvik/formulae/skhd"
+
+# GUI / Casks
+cask "sioyek"
+cask "ghostty"
