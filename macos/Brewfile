@@ -10,6 +10,10 @@ brew "eza"
 brew "bat"
 brew "git-delta"
 
+# Zsh QOL
+brew "zsh-syntax-highlighting"
+brew "zsh-autosuggestions"
+
 # Terminal Workflow
 brew "neovim"
 brew "tmux"
