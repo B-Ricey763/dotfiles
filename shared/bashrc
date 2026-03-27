@@ -38,3 +38,4 @@ printf '\e[5 q'
 PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }printf '\e[5 q'"
 
 [ -f ~/.bashrc.local ] && source ~/.bashrc.local
+. "$HOME/.cargo/env"
