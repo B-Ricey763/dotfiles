@@ -58,6 +58,8 @@ now_if_args(function()
     -- - Execute `:=require('nvim-treesitter').get_available()`
     -- - Visit 'SUPPORTED_LANGUAGES.md' file at
     --   https://github.com/nvim-treesitter/nvim-treesitter
+    'c',
+    'cpp',
   }
   local isnt_installed = function(lang)
     return #vim.api.nvim_get_runtime_file('parser/' .. lang .. '.*', false) == 0
@@ -97,9 +99,10 @@ now_if_args(function()
   -- Use `:h vim.lsp.enable()` to automatically enable language server based on
   -- the rules provided by 'nvim-lspconfig'.
   -- Use `:h vim.lsp.config()` or 'after/lsp/' directory to configure servers.
-  -- Uncomment and tweak the following `vim.lsp.enable()` call to enable servers.
   vim.lsp.enable({
+    -- Uncomment and tweak the following `vim.lsp.enable()` call to enable servers.
     'lua_ls',
+    'clangd'
   })
 end)
 
