@@ -23,7 +23,7 @@ echo "--- Shared configs ---"
 link_file "$DOTFILES_DIR/shared/ghostty" "$CONFIG_DIR/ghostty"
 link_file "$DOTFILES_DIR/shared/tmux" "$CONFIG_DIR/tmux"
 link_file "$DOTFILES_DIR/shared/starship.toml" "$CONFIG_DIR/starship.toml"
-link_file "$DOTFILES_DIR/shared/zshrc" "$HOME/.zshrc"
+link_file "$DOTFILES_DIR/shared/bashrc" "$HOME/.bashrc"
 link_file "$DOTFILES_DIR/shared/nvim" "$CONFIG_DIR/nvim"
 link_file "$DOTFILES_DIR/shared/gitconfig" "$HOME/.gitconfig"
 
@@ -48,6 +48,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     brew bundle --file="$DOTFILES_DIR/macos/Brewfile"
 
     echo "--- macOS Configs ---"
+    link_file "$DOTFILES_DIR/macos/zshrc" "$HOME/.zshrc"
     link_file "$DOTFILES_DIR/macos/skhd" "$CONFIG_DIR/skhd"
     link_file "$DOTFILES_DIR/macos/yabai" "$CONFIG_DIR/yabai"
 
