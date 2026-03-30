@@ -53,6 +53,10 @@ vim.o.winborder      = 'single'   -- Use border in floating windows
 vim.o.wrap           = false      -- Don't visually wrap lines (toggle with \w)
 vim.o.scrolloff      = 10         -- number of lines to keep on top/bottom of screen when scrolling
 
+-- Decrease time after pressing esc, etc.
+vim.opt.updatetime  = 250
+vim.opt.timeoutlen  = 300 -- Time to wait for a mapped sequence
+vim.opt.ttimeoutlen = 10  -- Time to wait for a terminal key code (fixes Esc delay)
 
 vim.o.cursorlineopt  = 'screenline,number' -- Show cursor line per screen line
 
