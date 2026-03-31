@@ -1,0 +1,6 @@
+os:
+  copyToClipboardCmd: "$HOME/scripts/osc52-copy"
+git:
+  overrideGpg: true
+  commit:
+      signOff: true

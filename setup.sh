@@ -26,6 +26,7 @@ link_file "$DOTFILES_DIR/shared/starship.toml" "$CONFIG_DIR/starship.toml"
 link_file "$DOTFILES_DIR/shared/bashrc" "$HOME/.bashrc"
 link_file "$DOTFILES_DIR/shared/nvim" "$CONFIG_DIR/nvim"
 link_file "$DOTFILES_DIR/shared/gitconfig" "$HOME/.gitconfig"
+link_file "$DOTFILES_DIR/shared/lazygit" "$CONFIG_DIR/lazygit"
 
 # macOS Setup (Runs automatically on macOS)
 if [[ "$OSTYPE" == "darwin"* ]]; then
