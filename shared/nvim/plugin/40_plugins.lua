@@ -60,6 +60,7 @@ now_if_args(function()
     --   https://github.com/nvim-treesitter/nvim-treesitter
     'c',
     'cpp',
+    'go',
   }
   local isnt_installed = function(lang)
     return #vim.api.nvim_get_runtime_file('parser/' .. lang .. '.*', false) == 0
@@ -102,7 +103,8 @@ now_if_args(function()
   vim.lsp.enable({
     -- Uncomment and tweak the following `vim.lsp.enable()` call to enable servers.
     'lua_ls',
-    'clangd'
+    'clangd',
+    'gopls',
   })
 end)
 
