@@ -1,3 +1,5 @@
+export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
+
 # aliases
 alias v="nvim"
 alias lg="lazygit"
@@ -26,17 +28,11 @@ function y() {
 	rm -f -- "$tmp"
 }
 
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
-
 
 # SDKMAN
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-# cursor: blinking pipe
-printf '\e[5 q'
-PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }printf '\e[5 q'"
 
 [ -f ~/.bashrc.local ] && source ~/.bashrc.local
 . "$HOME/.cargo/env"
