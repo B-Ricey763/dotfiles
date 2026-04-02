@@ -8,6 +8,5 @@ later(function ()
 
   require("snacks").setup({
     lazygit = {},
-    picker = {},
   })
 end)

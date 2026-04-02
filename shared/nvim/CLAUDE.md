@@ -13,7 +13,7 @@ Plugin files load in filename order:
 | `plugin/10_options.lua` | Core vim options, diagnostics config |
 | `plugin/20_keymaps.lua` | All keymaps; defines `Config.leader_group_clues` |
 | `plugin/30_mini.lua` | All `mini.*` module setup |
-| `plugin/35_snacks.lua` | `folke/snacks.nvim` (lazygit, register picker) |
+| `plugin/35_snacks.lua` | `folke/snacks.nvim` (lazygit) |
 | `plugin/40_plugins.lua` | tree-sitter, nvim-lspconfig, conform.nvim, colorscheme |
 | `after/lsp/<server>.lua` | Per-server LSP config overrides (optional) |
 | `after/ftplugin/<ft>.lua` | Filetype-specific overrides |

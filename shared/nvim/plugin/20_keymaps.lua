@@ -163,8 +163,7 @@ nmap_leader('fS', '<Cmd>Pick lsp scope="document_symbol"<CR>', 'Symbols document
 nmap_leader('fv', '<Cmd>Pick visit_paths cwd=""<CR>',          'Visit paths (all)')
 nmap_leader('fV', '<Cmd>Pick visit_paths<CR>',                 'Visit paths (cwd)')
 
--- Snacks pickers
-nmap_leader("fp", '<Cmd>lua Snacks.picker.registers()<CR>',    'Search Registers')
+nmap_leader("fp", '<Cmd>Pick registers<CR>',                    'Search Registers')
 
 -- g is for 'Git'. Common usage:
 -- - `<Leader>gs` - show information at cursor
