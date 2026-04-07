@@ -134,9 +134,6 @@ nmap_leader('eQ', explore_locations,                        'Location list')
 local pick_added_hunks_buf = '<Cmd>Pick git_hunks path="%" scope="staged"<CR>'
 local pick_workspace_symbols_live = '<Cmd>Pick lsp scope="workspace_symbol_live"<CR>'
 
-nmap_leader('<space>', '<Cmd>Pick visit_paths<CR>', 'Visit paths (cwd)')
-nmap_leader(',',       '<Cmd>Pick buffers<CR>',     'Buffers')
-
 nmap_leader('f/', '<Cmd>Pick history scope="/"<CR>',           '"/" history')
 nmap_leader('f:', '<Cmd>Pick history scope=":"<CR>',           '":" history')
 nmap_leader('fa', '<Cmd>Pick git_hunks scope="staged"<CR>',    'Added hunks (all)')
@@ -146,7 +143,7 @@ nmap_leader('fc', '<Cmd>Pick git_commits<CR>',                 'Commits (all)')
 nmap_leader('fC', '<Cmd>Pick git_commits path="%"<CR>',        'Commits (buf)')
 nmap_leader('fd', '<Cmd>Pick diagnostic scope="all"<CR>',      'Diagnostic workspace')
 nmap_leader('fD', '<Cmd>Pick diagnostic scope="current"<CR>',  'Diagnostic buffer')
-nmap_leader('ff', '<Cmd>lua MiniPick.builtin.files({}, { source = { cwd = vim.env.PWD } })<CR>', 'Files (global)')
+nmap_leader('ff', '<Cmd>Pick files cwd="' .. vim.env.PWD .. '"<CR>', 'Files (global)')
 nmap_leader('fF', '<Cmd>Pick files<CR>',                                                          'Files (local)')
 nmap_leader('fg', '<Cmd>Pick grep_live<CR>',                   'Grep live')
 nmap_leader('fG', '<Cmd>Pick grep pattern="<cword>"<CR>',      'Grep current word')
