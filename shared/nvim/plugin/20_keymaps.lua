@@ -123,7 +123,8 @@ nmap_leader('eq', explore_quickfix,                         'Quickfix list')
 nmap_leader('eQ', explore_locations,                        'Location list')
 
 -- f is for 'Fuzzy Find'. Common usage:
--- - `<Leader>ff` - find files; for best performance requires `ripgrep`
+-- - `<Leader>ff` - find files from launch dir; for best performance requires `ripgrep`
+-- - `<Leader>fF` - find files from cwd (local to current project root)
 -- - `<Leader>fg` - find inside files; requires `ripgrep`
 -- - `<Leader>fh` - find help tag
 -- - `<Leader>fr` - resume latest picker
@@ -132,9 +133,6 @@ nmap_leader('eQ', explore_locations,                        'Location list')
 -- All these use 'mini.pick'. See `:h MiniPick-overview` for an overview.
 local pick_added_hunks_buf = '<Cmd>Pick git_hunks path="%" scope="staged"<CR>'
 local pick_workspace_symbols_live = '<Cmd>Pick lsp scope="workspace_symbol_live"<CR>'
-
-nmap_leader('<space>', '<Cmd>Pick visit_paths<CR>', 'Visit paths (cwd)')
-nmap_leader(',',       '<Cmd>Pick buffers<CR>',     'Buffers')
 
 nmap_leader('f/', '<Cmd>Pick history scope="/"<CR>',           '"/" history')
 nmap_leader('f:', '<Cmd>Pick history scope=":"<CR>',           '":" history')
@@ -145,7 +143,8 @@ nmap_leader('fc', '<Cmd>Pick git_commits<CR>',                 'Commits (all)')
 nmap_leader('fC', '<Cmd>Pick git_commits path="%"<CR>',        'Commits (buf)')
 nmap_leader('fd', '<Cmd>Pick diagnostic scope="all"<CR>',      'Diagnostic workspace')
 nmap_leader('fD', '<Cmd>Pick diagnostic scope="current"<CR>',  'Diagnostic buffer')
-nmap_leader('ff', '<Cmd>Pick files<CR>',                       'Files')
+nmap_leader('ff', '<Cmd>Pick files cwd="' .. vim.env.PWD .. '"<CR>', 'Files (global)')
+nmap_leader('fF', '<Cmd>Pick files<CR>',                                                          'Files (local)')
 nmap_leader('fg', '<Cmd>Pick grep_live<CR>',                   'Grep live')
 nmap_leader('fG', '<Cmd>Pick grep pattern="<cword>"<CR>',      'Grep current word')
 nmap_leader('fh', '<Cmd>Pick help<CR>',                        'Help tags')
@@ -161,8 +160,7 @@ nmap_leader('fS', '<Cmd>Pick lsp scope="document_symbol"<CR>', 'Symbols document
 nmap_leader('fv', '<Cmd>Pick visit_paths cwd=""<CR>',          'Visit paths (all)')
 nmap_leader('fV', '<Cmd>Pick visit_paths<CR>',                 'Visit paths (cwd)')
 
--- Snacks pickers
-nmap_leader("fp", '<Cmd>lua Snacks.picker.registers()<CR>',    'Search Registers')
+nmap_leader("fp", '<Cmd>Pick registers<CR>',                    'Search Registers')
 
 -- g is for 'Git'. Common usage:
 -- - `<Leader>gs` - show information at cursor
@@ -190,6 +188,7 @@ xmap_leader('gs', '<Cmd>lua MiniGit.show_at_cursor()<CR>', 'Show at selection')
 -- - `<Leader>ld` - show more diagnostic details in a floating window
 -- - `<Leader>lr` - perform rename via LSP
 -- - `<Leader>ls` - navigate to source definition of symbol under cursor
+-- - `<Leader>lS` - switch between header and source file (clangd)
 --
 -- NOTE: most LSP mappings represent a more structured way of replacing built-in
 -- LSP mappings (like `:h gra` and others). This is needed because `gr` is mapped
@@ -202,6 +201,7 @@ nmap_leader('lh', '<Cmd>lua vim.lsp.buf.hover()<CR>',           'Hover')
 nmap_leader('lr', '<Cmd>lua vim.lsp.buf.rename()<CR>',          'Rename')
 nmap_leader('lR', '<Cmd>lua vim.lsp.buf.references()<CR>',      'References')
 nmap_leader('ls', '<Cmd>lua vim.lsp.buf.definition()<CR>',      'Source definition')
+nmap_leader('lS', '<Cmd>lua vim.lsp.buf_request(0, "textDocument/switchSourceHeader", vim.lsp.util.make_text_document_params(), function(_, result) if result then vim.cmd("edit " .. vim.uri_to_fname(result)) end end)<CR>', 'Switch header/source')
 nmap_leader('lt', '<Cmd>lua vim.lsp.buf.type_definition()<CR>', 'Type definition')
 
 xmap_leader('lf', '<Cmd>lua require("conform").format()<CR>', 'Format selection')

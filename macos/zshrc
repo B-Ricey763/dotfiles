@@ -9,6 +9,14 @@ alias b="bat"
 
 # tool setups
 source <(fzf --zsh)
+
+
+[ -f ~/scripts/fzf-git.sh ] && source ~/scripts/fzf-git.sh
+export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND='fd --type d --hidden --exclude .git'
+
+export STARSHIP_LOG=error
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 
@@ -20,6 +28,10 @@ function y() {
 	rm -f -- "$tmp"
 }
 
+export EDITOR="nvim"
+export VISUAL="nvim"
+
+export XDG_CONFIG_HOME="$HOME/.config"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 
@@ -28,8 +40,5 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh" 
 
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# opencode
-export PATH=/Users/bricey/.opencode/bin:$PATH
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

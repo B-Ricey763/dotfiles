@@ -1,0 +1,38 @@
+export PATH="$HOME/.fzf/bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
+
+# aliases
+alias v="nvim"
+alias lg="lazygit"
+alias gs='git status'
+alias l="eza -lah --icons --git"
+alias ll="eza -l --icons --git"
+alias lt="eza --tree --level=2 --icons"
+alias b="bat"
+
+# tool setups
+stty -ixon
+eval "$(fzf --bash)"
+[ -f ~/fzf-git.sh ] && source ~/fzf-git.sh
+export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND='fd --type d --hidden --exclude .git'
+export STARSHIP_LOG=error
+eval "$(starship init bash)"
+eval "$(zoxide init bash)"
+
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	command yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
+
+
+# SDKMAN
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+
+[ -f ~/.bashrc.local ] && source ~/.bashrc.local
+. "$HOME/.cargo/env"

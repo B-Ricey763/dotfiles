@@ -86,7 +86,12 @@ now(function() require('mini.notify').setup() end)
 -- - `<Leader>sn` - start new session
 -- - `<Leader>sr` - read previously started session
 -- - `<Leader>sd` - delete previously started session
-now(function() require('mini.sessions').setup() end)
+now(function()
+  local project_dir = vim.env.PWD:gsub('[/\\:*?"<>|]', '_')
+  require('mini.sessions').setup({
+    directory = vim.fn.stdpath('data') .. '/sessions/' .. project_dir,
+  })
+end)
 
 -- Start screen. This is what is shown when you open Neovim like `nvim`.
 -- Example usage:
