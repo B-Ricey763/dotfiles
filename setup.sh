@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define paths
-DOTFILES_DIR="$HOME/dotfiles"
+DOTFILES_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
 CONFIG_DIR="$HOME/.config"
 
 # Create .config dir if it doesn't exist

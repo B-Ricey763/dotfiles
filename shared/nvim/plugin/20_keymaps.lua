@@ -16,8 +16,8 @@ end
 
 -- Paste linewise before/after current line
 -- Usage: `yiw` to yank a word and `]p` to put it on the next line.
-nmap("[p", '<Cmd>exe "put! " . v:register<CR>', "Paste Above")
-nmap("]p", '<Cmd>exe "put "  . v:register<CR>', "Paste Below")
+nmap("[p", '<Cmd>exe "iput! " . v:register<CR>', "Paste Above")
+nmap("]p", '<Cmd>exe "iput "  . v:register<CR>', "Paste Below")
 
 -- Remove highlight on search
 nmap("<Esc>", "<cmd>nohlsearch<CR>")
@@ -225,8 +225,10 @@ nmap_leader('oz', '<Cmd>lua MiniMisc.zoom()<CR>',          'Zoom toggle')
 -- - `<Leader>sn` - start new session
 -- - `<Leader>sr` - read previously started session
 -- - `<Leader>sd` - delete previously started session
+-- - `<Leader>sR` - restart Neovim preserving current session
 local session_new = 'MiniSessions.write(vim.fn.input("Session name: "))'
 
+nmap_leader('sR', '<Cmd>lua MiniSessions.restart()<CR>',        'Restart')
 nmap_leader('sd', '<Cmd>lua MiniSessions.select("delete")<CR>', 'Delete')
 nmap_leader('sn', '<Cmd>lua ' .. session_new .. '<CR>',         'New')
 nmap_leader('sr', '<Cmd>lua MiniSessions.select("read")<CR>',   'Read')

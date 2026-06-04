@@ -1,10 +1,8 @@
-local add, later = MiniDeps.add, MiniDeps.later
-local now_if_args = Config.now_if_args
+local add = vim.pack.add
+local now_if_args, later = Config.now_if_args, Config.later
 
 later(function ()
-  add({
-    source = "folke/snacks.nvim",
-  })
+  add({ "https://github.com/folke/snacks.nvim" })
 
   require("snacks").setup({
     lazygit = {},

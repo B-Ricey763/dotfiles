@@ -9,8 +9,8 @@
 -- Use this file to install and configure other such plugins.
 
 -- Make concise helpers for installing/adding plugins in two stages
-local add, later = MiniDeps.add, MiniDeps.later
-local now_if_args = Config.now_if_args
+local add = vim.pack.add
+local now_if_args, later = Config.now_if_args, Config.later
 
 -- Tree-sitter ================================================================
 
@@ -37,13 +37,16 @@ local now_if_args = Config.now_if_args
 --   `vimdoc`, `markdown`, etc.), manually install them via 'nvim-treesitter'
 --   with `:TSInstall <language>`. Be sure to have necessary system dependencies
 --   (see MiniMax README section for software requirements).
+
+-- Define hook to update tree-sitter parsers after plugin is updated
+local ts_update = function() vim.cmd('TSUpdate') end
+Config.on_packchanged('nvim-treesitter', { 'update' }, ts_update, ':TSUpdate')
+
 now_if_args(function()
   add({
-    source = 'nvim-treesitter/nvim-treesitter',
-    -- Update tree-sitter parser after plugin is updated
-    hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
+    'https://github.com/nvim-treesitter/nvim-treesitter',
+    'https://github.com/nvim-treesitter/nvim-treesitter-textobjects',
   })
-  add('nvim-treesitter/nvim-treesitter-textobjects')
 
   -- Define languages which will have parsers installed and auto enabled
   -- After changing this, restart Neovim once to install necessary parsers. Wait
@@ -61,6 +64,13 @@ now_if_args(function()
     'c',
     'cpp',
     'go',
+    'tsx',
+    'typescript',
+    'javascript',
+    'css',
+    'html',
+    'scss',
+    'typst',
   }
   local isnt_installed = function(lang)
     return #vim.api.nvim_get_runtime_file('parser/' .. lang .. '.*', false) == 0
@@ -95,7 +105,7 @@ end)
 --
 -- Add it now if file (and not 'mini.starter') is shown after startup.
 now_if_args(function()
-  add('neovim/nvim-lspconfig')
+  add({ 'https://github.com/neovim/nvim-lspconfig' })
 
   -- Use `:h vim.lsp.enable()` to automatically enable language server based on
   -- the rules provided by 'nvim-lspconfig'.
@@ -117,7 +127,7 @@ end)
 -- The 'stevearc/conform.nvim' plugin is a good and maintained solution for easier
 -- formatting setup.
 later(function()
-  add('stevearc/conform.nvim')
+  add({ 'https://github.com/stevearc/conform.nvim' })
 
   -- See also:
   -- - `:h Conform`
@@ -143,10 +153,19 @@ end)
 -- snippet files. They are organized in 'snippets/' directory (mostly) per language.
 -- 'mini.snippets' is designed to work with it as seamlessly as possible.
 -- See `:h MiniSnippets.gen_loader.from_lang()`.
-later(function() add('rafamadriz/friendly-snippets') end)
+later(function() add({ 'https://github.com/rafamadriz/friendly-snippets' }) end)
 
-MiniDeps.now(function()
-  add('catppuccin/nvim')
+-- Theme
+Config.now(function()
+  add({
+    'https://github.com/catppuccin/nvim',
+  })
 
   vim.cmd('color catppuccin-mocha')
+end)
+
+later(function ()
+  add({ "https://github.com/chomosuke/typst-preview.nvim" })
+
+  require('typst-preview').setup()
 end)
