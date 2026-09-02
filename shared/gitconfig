@@ -15,3 +15,7 @@
 
 [merge]
     conflictstyle = zdiff3
+[user]
+	email = brycehanna@live.com
+[use]
+	name = Bryce Hanna
