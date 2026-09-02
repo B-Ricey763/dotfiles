@@ -1,4 +1,8 @@
-export PATH="$HOME/.fzf/bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
+for dir in "$HOME/.cargo/bin" "$HOME/.local/bin" "$HOME/.fzf/bin"; do
+	[ -d "$dir" ] && PATH="$dir:$PATH"
+done
+unset dir
+export PATH
 
 # aliases
 alias v="nvim"
@@ -10,15 +14,21 @@ alias lt="eza --tree --level=2 --icons"
 alias b="bat"
 
 # tool setups
-stty -ixon
-eval "$(fzf --bash)"
-[ -f ~/fzf-git.sh ] && source ~/fzf-git.sh
+[ -t 0 ] && stty -ixon
+if command -v fzf >/dev/null 2>&1; then
+	eval "$(fzf --bash)"
+fi
+[ -r "$HOME/fzf-git.sh" ] && source "$HOME/fzf-git.sh"
 export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND='fd --type d --hidden --exclude .git'
-export STARSHIP_LOG=error
-eval "$(starship init bash)"
-eval "$(zoxide init bash)"
+if command -v starship >/dev/null 2>&1; then
+	export STARSHIP_LOG=error
+	eval "$(starship init bash)"
+fi
+if command -v zoxide >/dev/null 2>&1; then
+	eval "$(zoxide init bash)"
+fi
 
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
@@ -30,9 +40,11 @@ function y() {
 
 
 # SDKMAN
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+if [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]]; then
+	export SDKMAN_DIR="$HOME/.sdkman"
+	source "$SDKMAN_DIR/bin/sdkman-init.sh"
+fi
 
 
-[ -f ~/.bashrc.local ] && source ~/.bashrc.local
-. "$HOME/.cargo/env"
+[ -r "$HOME/.bashrc.local" ] && source "$HOME/.bashrc.local"
+[ -r "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"

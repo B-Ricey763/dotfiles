@@ -8,17 +8,23 @@ alias lt="eza --tree --level=2 --icons"
 alias b="bat"
 
 # tool setups
-source <(fzf --zsh)
+if command -v fzf >/dev/null 2>&1; then
+	source <(fzf --zsh)
+fi
 
 
-[ -f ~/scripts/fzf-git.sh ] && source ~/scripts/fzf-git.sh
+[ -r "$HOME/scripts/fzf-git.sh" ] && source "$HOME/scripts/fzf-git.sh"
 export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND='fd --type d --hidden --exclude .git'
 
-export STARSHIP_LOG=error
-eval "$(starship init zsh)"
-eval "$(zoxide init zsh)"
+if command -v starship >/dev/null 2>&1; then
+	export STARSHIP_LOG=error
+	eval "$(starship init zsh)"
+fi
+if command -v zoxide >/dev/null 2>&1; then
+	eval "$(zoxide init zsh)"
+fi
 
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
@@ -33,14 +39,19 @@ export VISUAL="nvim"
 
 export XDG_CONFIG_HOME="$HOME/.config"
 
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/.opencode/bin:$PATH"
+typeset -U path PATH
+for dir in "$HOME/.local/bin" "$HOME/.cargo/bin" "$HOME/.opencode/bin"; do
+	[[ -d "$dir" ]] && path=("$dir" $path)
+done
+unset dir
 
 # SDKMAN
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh" 
+if [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]]; then
+	export SDKMAN_DIR="$HOME/.sdkman"
+	source "$SDKMAN_DIR/bin/sdkman-init.sh"
+fi
 
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
+[[ -r /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]] &&
+	source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+[[ -r /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] &&
+	source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
