@@ -5,6 +5,12 @@ All the things I use on the day to day
 ## Quickstart
 
 Clone and run `setup.sh` to make symlinks. It will autodetect OS and go from there.
+On macOS, it installs the Brewfile packages. It also bootstraps TPM and installs all
+declared tmux plugins, so no manual clone or `prefix + I` is needed.
+
+On other Unix-like systems, install `git` and `tmux` with your system package
+manager before running the script. Missing commands are reported and tmux plugin
+setup is skipped.
 
 ## Tools
 
